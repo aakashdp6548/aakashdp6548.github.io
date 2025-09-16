@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aakash Patel — PhD Student, Biomedical AI</title>
+  <meta name="description" content="Personal website for Aakash Patel, PhD student at Yale focusing on biomedical AI, single‑cell genomics, and multimodal learning." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #0a0a0a;
+      --muted: #5d5d5d;
+      --line: #e7e7e7;
+      --link: #1b5cff;
+      --accent: #1b5cff;
+      --card: #f7f7f7;
+      --shadow: 0 1px 1px rgba(0,0,0,.04), 0 8px 20px rgba(0,0,0,.04);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0c10;
+        --fg: #f3f5f7;
+        --muted: #aab0ba;
+        --line: #1c2026;
+        --link: #94b3ff;
+        --accent: #94b3ff;
+        --card: #11141a;
+        --shadow: none;
+      }
+    }
+    html, body { height: 100%; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.6 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Layout: compact left column, scrollable right content (al-folio-like) */
+    .page { display: grid; grid-template-columns: 280px 1fr; min-height: 100dvh; }
+    @media (max-width: 900px) { .page { grid-template-columns: 1fr; } }
+
+    aside {
+      border-right: 1px solid var(--line);
+      padding: 28px 22px; position: sticky; top: 0; align-self: start; height: 100dvh; overflow: auto; background: color-mix(in srgb, var(--bg), transparent 10%);
+    }
+    @media (max-width: 900px) { aside { position: static; height: auto; } }
+
+    main { padding: 36px min(6vw, 48px); }
+
+    .name { font-weight: 800; letter-spacing: -0.02em; font-size: clamp(26px, 4.2vw, 34px); line-height: 1.15; }
+    .role { color: var(--muted); margin-top: 6px; }
+
+    .profile { display: block; width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 20px auto; }
+    .nav { margin: 18px 0 26px; display: grid; gap: 8px; }
+    .nav a { color: var(--muted); }
+    .nav a:hover, .nav a:focus { color: var(--fg); }
+
+    .contact { display: grid; gap: 6px; margin-top: 18px; font-size: 14px; }
+    .badge { display: inline-block; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; color: var(--muted); }
+    .badgerow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+    section { padding: 22px 0 8px; }
+    .section-title { font-size: 13px; text-transform: lowercase; letter-spacing: 0.14em; color: var(--muted); margin: 0 0 10px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+
+    .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .item { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .item .t { font-weight: 600; }
+    .meta { color: var(--muted); font-size: 14px; }
+
+    .news { display: grid; gap: 6px; }
+    .news .entry { display: grid; grid-template-columns: 110px 1fr; gap: 12px; border-bottom: 1px dashed var(--line); padding: 8px 0; }
+    .news .entry:last-child { border-bottom: 0; }
+    .news .date { color: var(--muted); font-size: 14px; }
+
+    footer { border-top: 1px solid var(--line); padding: 18px min(6vw, 48px) 40px; color: var(--muted); }
+
+    .visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; border: 0; padding: 0; }
+  </style>
+</head>
+<body>
+  <a class="visually-hidden" href="#content">Skip to content</a>
+  <div class="page">
+    <aside>
+      <div class="name">Aakash Patel</div>
+      <img src="assets/profile-cropped.jpg" alt="Aakash Patel" class="profile">
+      <div class="role">PhD student, Computer Science @ Yale</div>
+      <nav class="nav" aria-label="Section navigation">
+        <a href="#about">about</a>
+        <a href="#news">news</a>
+        <a href="#publications">publications</a>
+        <!-- <a href="#talks">talks</a> -->
+        <a href="#contact">contact</a>
+        <a href="resume.pdf">cv</a>
+      </nav>
+      <div class="contact" aria-label="Quick contacts">
+        <div><a href="mailto:aakash.patel.ap2853@yale.edu">aakash.patel.ap2853@yale.edu</a></div>
+        <div><a href="https://github.com/aakashdp6548" target="_blank" rel="noopener">github.com/aakashdp6548</a></div>
+        <div><a href="https://linkedin.com/in/aakashdp6548" target="_blank" rel="noopener">linkedin.com/in/aakashdp6548</a></div>
+      </div>
+    </aside>
+
+    <main id="content">
+      <section id="about" aria-labelledby="about-h">
+        <h2 class="section-title" id="about-h">about</h2>
+        <div class="card">
+          <p>I am a PhD student in Computer Science at Yale, advised by Dr. David van Dijk. My research develops machine-learning methods for biological data, including representing single-cell gene expression data as natural language (Cell2Sentence), modeling cell-cell interactions in spatial transcriptomics with ligand-receptor priors, and vision-language models and agentic systems for interpreting and analyzing fMRI recordings. I am interested in interpretable and multimodal models, few-shot evaluation, and workflows that integrate prior biological knowledge. Before graduate school I worked as a software engineer and did a dual Masters at the University of Michigan in Computer Science and Mathematics. Outside the lab I enjoy coffee, bookstores, hiking, photography, and occasional craft projects.</p>
+        </div>
+      </section>
+
+      <section id="news" aria-labelledby="news-h">
+        <h2 class="section-title" id="news-h">news</h2>
+        <div class="news">
+          <div class="entry"><div class="date">Sep 2025</div><div>I am invited speaker at the Yale Data Science × Astrophysics Seminar.</div></div>
+          <div class="entry"><div class="date">May 2025</div><div>Presented <em>BrainLM</em> at the Envisioning AI at Yale Symposium.</div></div>
+          <div class="entry"><div class="date">May 2025</div><div>At ICLR presenting our paper <em>Intelligence at the Edge of Chaos</em>!.</div></div>
+          <div class="entry"><div class="date">Nov 2024</div><div>Presented Neural Posterior Estimation at Machine Learning for Transient Science (MaLTS).</div></div>
+        </div>
+      </section>
+
+      <section id="publications" aria-labelledby="pubs-h">
+        <h2 class="section-title" id="pubs-h">publications</h2>
+        <div class="news">
+          <div class="entry">
+            <div class="date">Apr 2025</div>
+            <div>
+              <div class="t"><a href="https://www.biorxiv.org/content/10.1101/2025.04.14.648850v1" target="_blank" rel="noopener">Scaling Large Language Models for Next‑Generation Single‑Cell Analysis</a></div>
+              <div class="meta">Under Review. Rizvi, Levine, <strong>Patel</strong>, Zhang, Wang, …, van Dijk.</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="date">Apr 2025</div>
+            <div>
+              <div class="t"><a href="https://arxiv.org/abs/2410.02536" target="_blank" rel="noopener">Intelligence at the Edge of Chaos</a></div>
+              <div class="meta">ICLR. Zhang, <strong>Patel</strong>, Rizvi, Liu, He, Karbasi, …, van Dijk.</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="date">Aug 2f025</div>
+            <div>
+              <div class="t"><a href="https://iopscience.iop.org/article/10.3847/1538-3881/adef32" target="_blank" rel="noopener">Neural Posterior Estimation for Cataloging Astronomical Images with Spatially Varying Backgrounds and Point Spread Functions</a></div>
+              <div class="meta">The Astronomical Journal. <strong>Patel</strong>, Zhang, Avestruz, Regier, & LSST DESC.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section id="talks" aria-labelledby="talks-h">
+        <h2 class="section-title" id="talks-h">talks</h2>
+        <ul class="list">
+          <li class="item"><div class="t">Yale Data Science × Astrophysics Seminar</div><div class="meta">Invited talk, Sep 2025.</div></li>
+          <li class="item"><div class="t">Envisioning AI at Yale Symposium</div><div class="meta">BrainLM, May 2025.</div></li>
+          <li class="item"><div class="t">International Conference on Learning Representations (ICLR)</div><div class="meta">Intelligence at the Edge of Chaos, May 2025.</div></li>
+          <li class="item"><div class="t">DESC Collaboration Wide Review</div><div class="meta">Neural Posterior Estimation, Feb 2025.</div></li>
+          <li class="item"><div class="t">Machine Learning for Transient Science (MaLTS)</div><div class="meta">Neural Posterior Estimation, Nov 2024.</div></li>
+        </ul>
+      </section> -->
+
+      <section id="contact" aria-labelledby="contact-h">
+        <h2 class="section-title" id="contact-h">contact</h2>
+        <div class="card">
+          <p>Email: <a href="mailto:aakash.patel.ap2853@yale.edu">aakash.patel.ap2853@yale.edu</a><br>
+          GitHub: <a href="https://github.com/aakashdp6548" target="_blank" rel="noopener">github.com/aakashdp6548</a><br>
+          LinkedIn: <a href="https://linkedin.com/in/aakashdp6548" target="_blank" rel="noopener">linkedin.com/in/aakashdp6548</a><br>
+          CV: <a href="resume.pdf">resume.pdf</a></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div>© <span id="y"></span> Aakash Patel · GitHub Pages ready</div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', '#' + id);
+        }
+      });
+    });
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aakash Patel",
+    "jobTitle": "PhD Student",
+    "affiliation": {"@type": "CollegeOrUniversity", "name": "Yale University"},
+    "email": "mailto:aakash.patel.ap2853@yale.edu",
+    "address": {"@type": "PostalAddress", "addressLocality": "New Haven", "addressRegion": "CT", "addressCountry": "US"},
+    "sameAs": [
+      "https://github.com/aakashdp6548",
+      "https://www.linkedin.com/in/aakashdp6548"
+    ],
+    "knowsAbout": ["single-cell genomics", "biomedical AI", "spatial transcriptomics", "multimodal learning", "fMRI"]
+  }
+  </script>
+</body>
+</html>
