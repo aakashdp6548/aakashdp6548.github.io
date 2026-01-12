@@ -140,6 +140,16 @@
 				<p><small>Department of Computer Science, Yale University</small></p>
 			</section>
 
+			<!-- Table of Contents -->
+			<section>
+				<h2>Overview</h2>
+				<ol style="font-size: 1.2em; line-height: 2;">
+					<li class="fragment highlight-current-blue">Foundation Model Background</li>
+					<li class="fragment highlight-current-blue">BrainLM Architecture and Training</li>
+					<li class="fragment highlight-current-blue">Model Benchmarking and Applications</li>
+				</ol>
+			</section>
+
 			<!-- Foundation Model Concept -->
 			<section>
 				<h2>The "Foundation" Model Concept</h2>
@@ -165,9 +175,9 @@
 				<h2>How Foundation Models "Learn"</h2>
 				<h3>The "Fill-in-the-Blank" Approach</h3>
 				<ul>
-					<li class="fragment"><strong>Self-Supervision:</strong> Hide parts of data → reconstruct</li>
-					<li class="fragment"><strong>Masking:</strong> Minimize reconstruction error</li>
-					<li class="fragment"><strong>Result:</strong> Model learns underlying structure</li>
+					<li>The cat sat on the <span style="position: relative; display: inline-block;"><span class="fragment fade-out" data-fragment-index="0">____</span><span class="fragment fade-in" data-fragment-index="0" style="position: absolute; left: 0; top: 0;">mat.</span></span></li>
+					<li class="fragment" data-fragment-index="1"><strong>Masking:</strong> Minimize reconstruction error</li>
+					<li class="fragment" data-fragment-index="2"><strong>Result:</strong> Model learns underlying structure</li>
 				</ul>
 				<p class="fragment"><small><em>Similar to a "cloze test" — predict the missing word/data</em></small></p>
 			</section>
