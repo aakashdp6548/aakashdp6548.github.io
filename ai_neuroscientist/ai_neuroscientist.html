@@ -330,18 +330,31 @@
 	<h2>The AI Neuroscientist</h2>
 	<h3>Bridging the gap between model builders and domain experts</h3>
 
-	<div style="display: flex; align-items: stretch; justify-content: center; gap: 40px; width: 100%; margin: 20px 0;">
+	<div style="display: flex; align-items: center; justify-content: center; gap: 0; width: 100%; margin: 20px 0;">
     
-		<div class="fragment fade-in" data-fragment-index="0" style="width: 260px; border: 1.5px solid #3a3a3a; border-radius: 10px; padding: 16px 22px; background: rgba(255,255,255,0.03); text-align: left;">
+		<div class="fragment fade-in" data-fragment-index="0" style="width: 260px; border: 1.5px solid #3a3a3a; border-radius: 10px; padding: 16px 22px; background: rgba(255,255,255,0.03); text-align: left; flex-shrink: 0;">
 			<div style="color: #888; font-size: 0.6em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px;">Model Builders</div>
 			<ul style="font-size: 0.5em; color: #bbb; line-height: 1.7; margin: 0; padding-left: 1em;">
 				<li>Foundation models &amp; tools</li>
 				<li>Deep engineering expertise</li>
-				<li style="color: #444;">Limited time per dataset</li>
+				<li style="color: #c06060;">Limited domain knowledge</li>
 			</ul>
 		</div>
+
+		<div style="position: relative; width: 80px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 60px;">
+			<div class="fragment current-visible" data-fragment-index="0" style="position: absolute; display: flex; align-items: center; line-height: 1;">
+				<div style="width: 32px; height: 1.5px; background: #666;"></div>
+				<div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid #666;"></div>
+				<span style="font-size: 1em; color: #c06060; font-weight: bold; line-height: 1; margin-left: 5px;">&#x2715;</span>
+			</div>
+			<div class="fragment fade-in" data-fragment-index="1" style="position: absolute; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+				<div style="font-size: 0.55em; color: #14b8a6;">&#x2192;</div>
+				<div style="width: 2px; height: 28px; background: #14b8a6; opacity: 0.4;"></div>
+				<div style="font-size: 0.55em; color: #14b8a6;">&#x2190;</div>
+			</div>
+		</div>
 	
-		<div class="fragment fade-in" data-fragment-index="1" style="flex: 1; max-width: 600px; height: 50%; align-self: center; border: 2px solid #14b8a6; border-radius: 10px; padding: 20px; background: rgba(20,184,166,0.08);">
+		<div class="fragment fade-in" data-fragment-index="1" style="flex: 1; max-width: 480px; border: 2px solid #14b8a6; border-radius: 10px; padding: 20px; background: rgba(20,184,166,0.08); flex-shrink: 0;">
 			<div style="color: #14b8a6; font-weight: bold; font-size: 0.55em; text-align: center; margin-bottom: 15px;">AI Neuroscientist</div>
 			<div style="display: flex; justify-content: space-around; gap: 10px; text-align: center;">
 				<div style="font-size: 0.45em; color: #aaa; flex: 1;">Understands intent</div>
@@ -350,20 +363,29 @@
 				<div style="font-size: 0.45em; color: #aaa; flex: 1;">Searches literature</div>
 			</div>
 		</div>
+
+		<div style="position: relative; width: 80px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 60px;">
+			<div class="fragment current-visible" data-fragment-index="0" style="position: absolute; display: flex; align-items: center; line-height: 1;">
+				<span style="font-size: 1em; color: #c06060; font-weight: bold; line-height: 1; margin-right: 5px;">&#x2715;</span>
+				<div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-right: 8px solid #666;"></div>
+				<div style="width: 32px; height: 1.5px; background: #666;"></div>
+			</div>
+			<div class="fragment fade-in" data-fragment-index="1" style="position: absolute; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+				<div style="font-size: 0.55em; color: #14b8a6;">&#x2192;</div>
+				<div style="width: 2px; height: 28px; background: #14b8a6; opacity: 0.4;"></div>
+				<div style="font-size: 0.55em; color: #14b8a6;">&#x2190;</div>
+			</div>
+		</div>
 	
-		<div class="fragment fade-in" data-fragment-index="0" style="width: 260px; border: 1.5px solid #3a3a3a; border-radius: 10px; padding: 16px 22px; background: rgba(255,255,255,0.03); text-align: left;">
+		<div class="fragment fade-in" data-fragment-index="0" style="width: 260px; border: 1.5px solid #3a3a3a; border-radius: 10px; padding: 16px 22px; background: rgba(255,255,255,0.03); text-align: left; flex-shrink: 0;">
 			<div style="color: #888; font-size: 0.6em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px;">Domain Scientists</div>
 			<ul style="font-size: 0.5em; color: #bbb; line-height: 1.7; margin: 0; padding-left: 1em;">
 				<li>Deep neuroscience expertise</li>
 				<li>Rich experimental datasets</li>
-				<li style="color: #444;">Limited coding bandwidth</li>
+				<li style="color: #c06060;">Limited computational knowledge</li>
 			</ul>
 		</div>
 	</div>
-
-	<p class="fragment fade-in" data-fragment-index="2" style="font-size: 0.58em; color: #555; margin: 4px auto; max-width: 700px; text-align: center; font-style: italic;">
-		"Run a connectivity analysis on my resting-state fMRI data and cross-reference the findings with recent DMN literature."
-	</p>
 </section>
 
 <!-- ─── 7. Automated data processing ─── -->
@@ -449,30 +471,26 @@
 	<h2>The Junior Neuroscientist</h2>
 	<h3>Framing the agent as a collaborator</h3>
 
-	<div class="table-icon-row" style="max-width: 600px; margin: 16px auto 6px;">
-		<div class="col-icon">✅</div>
-		<div class="col-icon">🧑‍🔬</div>
-	</div>
 
-	<table style="max-width: 600px; margin: 0 auto;">
+	<table style="max-width: 800px; margin: 0 auto; font-size: 0.9em; border-spacing: 0 10px; table-layout: fixed; width: 100%;">
 		<thead>
 			<tr>
-				<th>Agent Tasks</th>
-				<th>Human Tasks</th>
+				<th style="padding: 16px 36px; width: 50%;">Agent Tasks 🤖</th>
+				<th style="padding: 16px 36px; width: 50%;">Human Tasks 🧑‍🔬</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>Routine data preparation</td>
-				<td>Experimental design</td>
+				<td style="padding: 16px 32px; width: 50%;">Routine data preparation</td>
+				<td style="padding: 16px 32px; width: 50%;">Experimental design</td>
 			</tr>
 			<tr>
-				<td>Statistical extraction</td>
-				<td>Final validation</td>
+				<td style="padding: 16px 32px; width: 50%;">Statistical extraction</td>
+				<td style="padding: 16px 32px; width: 50%;">Final validation</td>
 			</tr>
 			<tr>
-				<td>Literature synthesis</td>
-				<td>Hypothesis selection</td>
+				<td style="padding: 16px 32px; width: 50%;">Literature synthesis</td>
+				<td style="padding: 16px 32px; width: 50%;">Hypothesis selection</td>
 			</tr>
 		</tbody>
 	</table>
