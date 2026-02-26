@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>AI Agents in Neuroscience</title>
+	<link rel="stylesheet" href="../dist/reset.css">
+	<link rel="stylesheet" href="../dist/reveal.css">
+	<link rel="stylesheet" href="../dist/theme/black.css" id="theme">
+	<style>
+		/* ── Override reveal default heading sizes / uppercase ── */
+		.reveal h1 {
+			color: #14b8a6;
+			font-size: 2em;
+			text-transform: none;
+			margin-bottom: 0.3em;
+		}
+		.reveal h2 {
+			color: #14b8a6;
+			font-size: 1.3em;
+			text-transform: none;
+			margin-bottom: 0.15em;
+		}
+		.reveal h3 {
+			color: #8b5cf6;
+			font-size: 0.8em;
+			text-transform: none;
+			margin-bottom: 0.2em;
+		}
+		.reveal strong { color: #f472b6; }
+		.reveal .slides section {
+			padding: 16px 48px;
+			box-sizing: border-box;
+		}
+
+		/* ── Table ── */
+		.reveal table { margin: 6px auto; }
+		.reveal table th {
+			background: rgba(20,184,166,0.2);
+			color: #14b8a6;
+		}
+		.reveal table td, .reveal table th {
+			padding: 8px 22px;
+			border: 1px solid #444;
+			font-size: 0.78em;
+		}
+
+		/* ── Shared placeholder box ── */
+		.placeholder {
+			background: #111827;
+			border: 2px dashed #14b8a6;
+			border-radius: 8px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			color: #555;
+			font-size: 0.7em;
+			text-align: center;
+			padding: 12px;
+			line-height: 1.5;
+			box-sizing: border-box;
+		}
+
+		/* ── Slide 2: split layout ── */
+		.split-slide {
+			display: flex;
+			height: 58vh;
+			gap: 0;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		.split-left, .split-right {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 16px 18px;
+			gap: 10px;
+		}
+		.split-left { background: rgba(20,184,166,0.08); border-right: 1px solid #333; }
+		.split-right { background: rgba(139,92,246,0.08); }
+		.split-label {
+			font-size: 0.7em;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+		}
+		.split-left .split-label { color: #14b8a6; }
+		.split-right .split-label { color: #8b5cf6; }
+
+		/* ── Slide 3: step boxes ── */
+		.step-diagram {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0;
+			margin: 16px 0 8px;
+		}
+		.step-box {
+			background: rgba(20,184,166,0.1);
+			border: 2px solid #14b8a6;
+			border-radius: 10px;
+			padding: 16px 18px;
+			text-align: center;
+			min-width: 150px;
+		}
+		.step-box .step-title {
+			color: #14b8a6;
+			font-weight: bold;
+			font-size: 0.82em;
+		}
+		.step-box .step-desc {
+			color: #aaa;
+			font-size: 0.62em;
+			margin-top: 5px;
+		}
+		.step-arrow {
+			font-size: 1.5em;
+			color: #14b8a6;
+			padding: 0 8px;
+			flex-shrink: 0;
+		}
+
+		/* ── Slide 5: three-panel grid ── */
+		.panel-grid {
+			display: flex;
+			gap: 16px;
+			justify-content: center;
+			margin-top: 12px;
+		}
+		.panel-cell {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 8px;
+		}
+		.panel-caption {
+			font-size: 0.64em;
+			color: #aaa;
+			text-align: center;
+			line-height: 1.3;
+		}
+
+		/* ── Slide 6: flowchart ── */
+		.flowchart {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0;
+			margin: 22px 0;
+		}
+		.flow-box {
+			border-radius: 10px;
+			padding: 18px 16px;
+			text-align: center;
+			min-width: 160px;
+		}
+		.flow-box .flow-title {
+			font-weight: bold;
+			font-size: 0.78em;
+			margin-bottom: 6px;
+		}
+		.flow-box .flow-sub { font-size: 0.62em; color: #aaa; }
+		.flow-source {
+			background: rgba(20,184,166,0.12);
+			border: 2px solid #14b8a6;
+			color: #e2e8f0;
+		}
+		.flow-process {
+			background: rgba(70,70,80,0.7);
+			border: 2px solid #555;
+			color: #e2e8f0;
+		}
+		.flow-output {
+			background: rgba(139,92,246,0.12);
+			border: 2px solid #8b5cf6;
+			color: #e2e8f0;
+		}
+		.flow-arrow {
+			font-size: 1.6em;
+			color: #14b8a6;
+			padding: 0 8px;
+			flex-shrink: 0;
+		}
+
+		/* ── Slide 8: table icon row ── */
+		.table-icon-row {
+			display: flex;
+			justify-content: center;
+			gap: 0;
+			margin-bottom: 6px;
+		}
+		.col-icon {
+			flex: 1;
+			max-width: 280px;
+			text-align: center;
+			font-size: 1.4em;
+		}
+
+		/* ── Slide 9: demo screen ── */
+		.demo-screen {
+			border: 3px solid rgba(255,255,255,0.7);
+			border-radius: 6px;
+			width: 72%;
+			height: 48vh;
+			margin: 14px auto 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #444;
+			font-size: 0.8em;
+			position: relative;
+			background: rgba(255,255,255,0.02);
+		}
+		.demo-label {
+			position: absolute;
+			top: 0;
+			left: 16px;
+			background: #111;
+			padding: 0 8px;
+			font-size: 0.68em;
+			color: #999;
+			transform: translateY(-50%);
+		}
+	</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ─── 1. Title ─── -->
+<section>
+	<h1>AI Agents in Neuroscience</h1>
+	<h3 style="font-size: 1em; margin-top: 0.4em;">Toward an AI Neuroscientist Workshop</h3>
+	<h4 style="font-size: 0.55em; margin-top: 0.4em;">Aakash Patel, Panos Ketonis</h4>
+	<h4 style="font-size: 0.55em; margin-top: 0.4em;">February 27, 2026</h4>
+</section>
+
+<!-- ─── 2. Standard models vs. agents ─── -->
+<section>
+	<h2>Standard Models vs. Agents</h2>
+	<h3>Static text generation vs. autonomous action</h3>
+	<div class="split-slide" style="margin-top: 10px;">
+		<div class="split-left">
+			<div class="split-label">Traditional Model</div>
+			<img src="images/static-model.png" alt="Traditional Model" style="width: 80%; height: 80%; object-fit: contain;">
+		</div>
+		<div class="split-right">
+			<div class="split-label">Agentic System</div>
+			<img src="images/agentic-system.png" alt="Agentic System" style="width: 80%; height: 80%; object-fit: contain;">
+		</div>
+	</div>
+</section>
+
+<!-- ─── 3. The agentic loop ─── -->
+<section>
+	<h2>The Agentic Loop</h2>
+	<h3>Task decomposition and self-correction</h3>
+
+	<div class="step-diagram" id="step-diagram">
+		<div class="step-box fragment fade-in" id="step-box-first" data-fragment-index="0">
+			<div class="step-title">Reasoning</div>
+			<div class="step-desc">Plan next action</div>
+		</div>
+		<div class="step-arrow fragment fade-in" data-fragment-index="1">→</div>
+		<div class="step-box fragment fade-in" data-fragment-index="1">
+			<div class="step-title">Tool Execution</div>
+			<div class="step-desc">Run code, query data</div>
+		</div>
+		<div class="step-arrow fragment fade-in" data-fragment-index="2">→</div>
+		<div class="step-box fragment fade-in" id="step-box-last" data-fragment-index="2">
+			<div class="step-title">Error Correction</div>
+			<div class="step-desc">Observe output, adjust</div>
+		</div>
+	</div>
+
+	<!-- Feedback arrow: coordinates set dynamically by positionFeedbackArrow() -->
+	<svg id="feedback-svg" class="fragment fade-in" data-fragment-index="3" height="54" style="display: block; width: 100%;"
+		 preserveAspectRatio="none">
+		<line id="fb-drop-right" stroke="#8b5cf6" stroke-width="2"/>
+		<line id="fb-horiz"      stroke="#8b5cf6" stroke-width="2"/>
+		<line id="fb-rise-left"  stroke="#8b5cf6" stroke-width="2"/>
+		<polygon id="fb-arrow"   fill="#8b5cf6"/>
+		<rect id="fb-pill" height="22" rx="11" fill="rgba(139,92,246,1.0)" stroke="#8b5cf6" stroke-width="1"/>
+		<text id="fb-label" text-anchor="middle" fill="white" font-size="14">feedback loop</text>
+	</svg>
+</section>
+
+<!-- ─── 4. Mechanics and tools ─── -->
+<section>
+	<h2>Mechanics and Tools</h2>
+	<h3>Memory and external tool access</h3>
+
+	<svg id="tools-svg" style="display: block; margin: 6px auto; max-width: 92%;"></svg>
+</section>
+
+<!-- ─── 5. Existing automated scientists ─── -->
+<section>
+	<h2>Existing Automated Scientists</h2>
+	<h3>Precedents in chemistry and biology</h3>
+	<p style="font-size: 0.7em; color: #bbb; margin: 6px 0 14px;">
+		AI agents already automate synthesis, sequencing, and imaging across scientific disciplines.
+	</p>
+	<div class="panel-grid">
+		<div class="panel-cell fragment fade-in" data-fragment-index="0">
+			<div class="placeholder" style="height: 190px; width: 100%;">
+				<img src="images/automated-synthesis.png" alt="Automated Synthesis" style="width: 100%; height: 100%; object-fit: contain;">
+			</div>
+			<div class="panel-caption"><strong style="color:#14b8a6;">Automated Synthesis</strong><br>Chemistry &amp; drug discovery</div>
+		</div>
+		<div class="panel-cell fragment fade-in" data-fragment-index="1">
+			<div class="placeholder" style="height: 190px; width: 100%;">
+				<img src="images/coding-agent.png" alt="Coding Agent" style="width: 100%; height: 100%; object-fit: contain;">
+			</div>
+			<div class="panel-caption"><strong style="color:#14b8a6;">Autonomous Coding</strong><br>Data pipelines &amp; analysis</div>
+		</div>
+		<div class="panel-cell fragment fade-in" data-fragment-index="2">
+			<div class="placeholder" style="height: 190px; width: 100%;">
+				<img src="images/scrnaseq-umap.png" alt="Single-cell sequencing" style="width: 100%; height: 100%; object-fit: contain;">
+			</div>
+			<div class="panel-caption"><strong style="color:#14b8a6;">scRNA-seq processing</strong><br>Cell biology &amp; pathology</div>
+		</div>
+	</div>
+</section>
+
+<!-- ─── 6. The AI Neuroscientist ─── -->
+<section>
+	<h2>The AI Neuroscientist</h2>
+	<h3>Bridging the gap between model builders and domain experts</h3>
+
+	<div style="display: flex; align-items: stretch; justify-content: center; gap: 40px; width: 100%; margin: 20px 0;">
+    
+		<div class="fragment fade-in" data-fragment-index="0" style="width: 260px; border: 1.5px solid #3a3a3a; border-radius: 10px; padding: 16px 22px; background: rgba(255,255,255,0.03); text-align: left;">
+			<div style="color: #888; font-size: 0.6em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px;">Model Builders</div>
+			<ul style="font-size: 0.5em; color: #bbb; line-height: 1.7; margin: 0; padding-left: 1em;">
+				<li>Foundation models &amp; tools</li>
+				<li>Deep engineering expertise</li>
+				<li style="color: #444;">Limited time per dataset</li>
+			</ul>
+		</div>
+	
+		<div class="fragment fade-in" data-fragment-index="1" style="flex: 1; max-width: 600px; height: 50%; align-self: center; border: 2px solid #14b8a6; border-radius: 10px; padding: 20px; background: rgba(20,184,166,0.08);">
+			<div style="color: #14b8a6; font-weight: bold; font-size: 0.55em; text-align: center; margin-bottom: 15px;">AI Neuroscientist</div>
+			<div style="display: flex; justify-content: space-around; gap: 10px; text-align: center;">
+				<div style="font-size: 0.45em; color: #aaa; flex: 1;">Understands intent</div>
+				<div style="font-size: 0.45em; color: #aaa; flex: 1;">Selects &amp; runs models</div>
+				<div style="font-size: 0.45em; color: #aaa; flex: 1;">Interprets results</div>
+				<div style="font-size: 0.45em; color: #aaa; flex: 1;">Searches literature</div>
+			</div>
+		</div>
+	
+		<div class="fragment fade-in" data-fragment-index="0" style="width: 260px; border: 1.5px solid #3a3a3a; border-radius: 10px; padding: 16px 22px; background: rgba(255,255,255,0.03); text-align: left;">
+			<div style="color: #888; font-size: 0.6em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px;">Domain Scientists</div>
+			<ul style="font-size: 0.5em; color: #bbb; line-height: 1.7; margin: 0; padding-left: 1em;">
+				<li>Deep neuroscience expertise</li>
+				<li>Rich experimental datasets</li>
+				<li style="color: #444;">Limited coding bandwidth</li>
+			</ul>
+		</div>
+	</div>
+
+	<p class="fragment fade-in" data-fragment-index="2" style="font-size: 0.58em; color: #555; margin: 4px auto; max-width: 700px; text-align: center; font-style: italic;">
+		"Run a connectivity analysis on my resting-state fMRI data and cross-reference the findings with recent DMN literature."
+	</p>
+</section>
+
+<!-- ─── 7. Automated data processing ─── -->
+<section>
+	<h2>Automated Data Processing</h2>
+	<h3>Standardizing neuroscience workflows</h3>
+
+	<div class="flowchart">
+		<div class="flow-box flow-source fragment fade-in" data-fragment-index="0">
+			<div class="flow-title">Raw Neural Recordings</div>
+			<div class="flow-sub">fMRI, EEG &amp; ephys input</div>
+		</div>
+		<div class="flow-arrow fragment fade-in" data-fragment-index="1">→</div>
+		<div class="flow-box flow-process fragment fade-in" data-fragment-index="1">
+			<div class="flow-title">Preprocessing &amp; QC Scripts</div>
+			<div class="flow-sub">Agent-automated background process</div>
+		</div>
+		<div class="flow-arrow fragment fade-in" data-fragment-index="2">→</div>
+		<div class="flow-box flow-output fragment fade-in" data-fragment-index="2">
+			<div class="flow-title">Interaction Maps</div>
+			<div class="flow-sub">Analysis-ready outputs</div>
+		</div>
+	</div>
+
+	<div style="display: flex; justify-content: center; gap: 60px; margin-top: 6px;">
+		<div class="fragment fade-in" data-fragment-index="3" style="font-size: 0.62em; color: #aaa; text-align: center;">
+			<span style="color: #14b8a6; font-weight: bold;">fMRI</span><br>
+			Motion correction, denoising,<br>temporal filtering
+		</div>
+		<div class="fragment fade-in" data-fragment-index="4" style="font-size: 0.62em; color: #aaa; text-align: center;">
+			<span style="color: #8b5cf6; font-weight: bold;">EEG / Ephys</span><br>
+			Spike sorting,<br>artifact removal
+		</div>
+	</div>
+</section>
+
+<!-- ─── 7. Multimodal hypothesis generation ─── -->
+<section>
+	<h2>Multimodal Hypothesis Generation</h2>
+	<h3>Synthesizing data, tools, and literature into testable predictions</h3>
+
+	<div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin: 14px 0 12px;">
+		<!-- Inputs -->
+		<div class="fragment fade-in" data-fragment-index="0" style="display: flex; flex-direction: column; gap: 8px;">
+			<div style="border: 1.5px solid #14b8a6; border-radius: 8px; padding: 8px 16px; font-size: 0.62em; color: #14b8a6; text-align: center; background: rgba(20,184,166,0.08);">fMRI / EEG Recordings</div>
+			<div style="border: 1.5px solid #8b5cf6; border-radius: 8px; padding: 8px 16px; font-size: 0.62em; color: #c4b5fd; text-align: center; background: rgba(139,92,246,0.08);">Computational Tools</div>
+			<div style="border: 1.5px solid #f472b6; border-radius: 8px; padding: 8px 16px; font-size: 0.62em; color: #f9a8d4; text-align: center; background: rgba(244,114,182,0.08);">Published Literature</div>
+		</div>
+
+		<div class="fragment fade-in" data-fragment-index="1" style="font-size: 1.6em; color: #555; flex-shrink: 0;">→</div>
+
+		<!-- Agent -->
+		<div class="fragment fade-in" data-fragment-index="1" style="border: 2px solid #14b8a6; border-radius: 10px; padding: 16px 22px; text-align: center; background: rgba(20,184,166,0.08); flex-shrink: 0;">
+			<div style="color: #14b8a6; font-weight: bold; font-size: 0.78em;">AI Agent</div>
+			<div style="color: #888; font-size: 0.55em; margin-top: 6px; line-height: 1.5;">Search → Retrieve<br>Analyze → Reason</div>
+		</div>
+
+		<div class="fragment fade-in" data-fragment-index="2" style="font-size: 1.6em; color: #555; flex-shrink: 0;">→</div>
+
+		<!-- Output -->
+		<div class="fragment fade-in" data-fragment-index="2" style="border: 2px solid #f472b6; border-radius: 10px; padding: 16px 22px; text-align: center; background: rgba(244,114,182,0.08); flex-shrink: 0;">
+			<div style="color: #f472b6; font-weight: bold; font-size: 0.78em;">Hypothesis</div>
+			<div style="color: #888; font-size: 0.55em; margin-top: 6px; line-height: 1.5;">Falsifiable<br>prediction</div>
+		</div>
+	</div>
+
+	<!-- Concrete example -->
+	<div class="fragment fade-in" data-fragment-index="3" style="border-left: 3px solid #f472b6; margin: 4px auto; max-width: 800px; padding: 10px 18px; background: rgba(244,114,182,0.05); border-radius: 0 8px 8px 0;">
+		<div style="font-size: 0.55em; color: #f472b6; font-weight: bold; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em;">Example agent output</div>
+		<p style="font-size: 0.5em; color: #ccc; margin: 0; font-style: italic; line-height: 1.65;">
+			"Prefrontal theta power is suppressed during failed encoding trials in the loaded EEG data, and hippocampal BOLD is
+			concurrently reduced in the fMRI runs. After retrieving Buzsáki &amp; Moser (2013) on theta oscillations and episodic
+			memory via the literature tool, I hypothesize that
+			<span style="color: #f9a8d4; font-style: normal; font-weight: bold;">disrupted prefrontal–hippocampal theta synchrony
+			is the mechanistic driver of the observed encoding deficit</span> — falsifiable by phase-amplitude coupling analysis
+			of the concurrent LFP recordings."
+		</p>
+	</div>
+</section>
+
+<!-- ─── 8. The junior neuroscientist ─── -->
+<section>
+	<h2>The Junior Neuroscientist</h2>
+	<h3>Framing the agent as a collaborator</h3>
+
+	<div class="table-icon-row" style="max-width: 600px; margin: 16px auto 6px;">
+		<div class="col-icon">✅</div>
+		<div class="col-icon">🧑‍🔬</div>
+	</div>
+
+	<table style="max-width: 600px; margin: 0 auto;">
+		<thead>
+			<tr>
+				<th>Agent Tasks</th>
+				<th>Human Tasks</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Routine data preparation</td>
+				<td>Experimental design</td>
+			</tr>
+			<tr>
+				<td>Statistical extraction</td>
+				<td>Final validation</td>
+			</tr>
+			<tr>
+				<td>Literature synthesis</td>
+				<td>Hypothesis selection</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<!-- ─── 9. Transition to live demo ─── -->
+<section>
+	<h2 style="text-align: left; font-size: 1em; margin-bottom: 4px;">
+		Transition to Live Demonstration
+	</h2>
+	<h3 style="text-align: left; font-size: 0.72em; margin-bottom: 0;">
+		Anchoring theory to the workshop prototype
+	</h3>
+
+	<div class="demo-screen">
+		<div class="demo-label">BrainLM / Neural Agent prototype</div>
+		<span style="color: #3a3a3a; font-size: 0.85em;">[ Live screen share ]</span>
+	</div>
+</section>
+
+</div>
+</div>
+
+<script src="../dist/reveal.js"></script>
+<script>
+	Reveal.initialize({
+		hash: true,
+		controls: true,
+		progress: true,
+		center: true,
+		transition: "slide"
+	});
+
+	function positionFeedbackArrow() {
+		const firstBox = document.getElementById("step-box-first");
+		const lastBox  = document.getElementById("step-box-last");
+		const svg      = document.getElementById("feedback-svg");
+		if (!firstBox || !lastBox || !svg) return;
+
+		const svgRect   = svg.getBoundingClientRect();
+		const firstRect = firstBox.getBoundingClientRect();
+		const lastRect  = lastBox.getBoundingClientRect();
+
+		// x positions of box centers relative to the SVG's left edge
+		const xLeft  = (firstRect.left + firstRect.right)  / 2 - svgRect.left;
+		const xRight = (lastRect.left  + lastRect.right)   / 2 - svgRect.left;
+		const yMid   = 30;  // halfway down the 54px SVG
+		const yTop   = 4;   // where the vertical lines meet the boxes
+
+		// Update SVG viewBox to match its pixel width so coordinates are 1:1 px
+		const w = svgRect.width;
+		svg.setAttribute("viewBox", `0 0 ${w} 54`);
+
+		document.getElementById("fb-drop-right").setAttribute("x1", xRight);
+		document.getElementById("fb-drop-right").setAttribute("y1", yTop);
+		document.getElementById("fb-drop-right").setAttribute("x2", xRight);
+		document.getElementById("fb-drop-right").setAttribute("y2", yMid);
+
+		document.getElementById("fb-horiz").setAttribute("x1", xLeft);
+		document.getElementById("fb-horiz").setAttribute("y1", yMid);
+		document.getElementById("fb-horiz").setAttribute("x2", xRight);
+		document.getElementById("fb-horiz").setAttribute("y2", yMid);
+
+		document.getElementById("fb-rise-left").setAttribute("x1", xLeft);
+		document.getElementById("fb-rise-left").setAttribute("y1", yTop);
+		document.getElementById("fb-rise-left").setAttribute("x2", xLeft);
+		document.getElementById("fb-rise-left").setAttribute("y2", yMid);
+
+		// Arrowhead pointing up at xLeft
+		document.getElementById("fb-arrow").setAttribute(
+			"points", `${xLeft - 6},${yTop + 6} ${xLeft},${yTop} ${xLeft + 6},${yTop + 6}`
+		);
+
+		// Center pill between xLeft and xRight
+		const pillW  = 100;
+		const pillX  = (xLeft + xRight) / 2 - pillW / 2;
+		const pillY  = yMid - 11;
+		document.getElementById("fb-pill").setAttribute("x", pillX);
+		document.getElementById("fb-pill").setAttribute("y", pillY);
+		document.getElementById("fb-pill").setAttribute("width", pillW);
+
+		document.getElementById("fb-label").setAttribute("x", (xLeft + xRight) / 2);
+		document.getElementById("fb-label").setAttribute("y", yMid + 4);
+	}
+
+	function buildToolsDiagram() {
+		const svg = document.getElementById("tools-svg");
+		if (!svg) return;
+
+		const W = 740, H = 420;
+		svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+		svg.setAttribute("width", W);
+		svg.setAttribute("height", H);
+
+		const cx0 = 370, cy0 = 220, r0 = 62;
+		const purple = { stroke: "#8b5cf6", fill: "rgba(139,92,246,0.15)", textColor: "#c4b5fd" };
+		const pink   = { stroke: "#bf00bf", fill: "rgba(191,0,191,0.15)",  textColor: "#e879e8" };
+
+		const nodes = [
+			{ angle: -85, orbit: 150, r: 55, ...purple, label: ["Terminal", "Code Editor"],       sublabel: "Execute scripts" },
+			{ angle:  -10, orbit: 190, r: 70, ...pink,   label: ["Domain-Specific", "Tools"], sublabel: "Specialized analysis" },
+			{ angle:   50, orbit: 160, r: 53, ...purple, label: ["Memory", "Storage"],        sublabel: "Persist context" },
+			{ angle:  140, orbit: 170, r: 65, ...pink,   label: ["Data", "Processing"],       sublabel: "Transform & analyze" },
+			{ angle:  200, orbit: 190, r: 55, ...purple, label: ["Literature", "Database"],   sublabel: "Search & retrieve" },
+		];
+
+		nodes.forEach(n => {
+			const rad = n.angle * Math.PI / 180;
+			n.cx = cx0 + n.orbit * Math.cos(rad);
+			n.cy = cy0 + n.orbit * Math.sin(rad);
+		});
+
+		const ns = "http://www.w3.org/2000/svg";
+		function mkEl(tag, attrs) {
+			const el = document.createElementNS(ns, tag);
+			for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+			return el;
+		}
+		function mkText(content, attrs) {
+			const el = mkEl("text", attrs);
+			el.textContent = content;
+			return el;
+		}
+
+		svg.innerHTML = "";
+
+		// Each satellite (spoke + circle + labels) is a fragment so it fades in on click
+		nodes.forEach((n, i) => {
+			const dx = n.cx - cx0, dy = n.cy - cy0;
+			const dist = Math.hypot(dx, dy);
+			const ux = dx / dist, uy = dy / dist;
+
+			const g = mkEl("g", { class: "fragment fade-in", "data-fragment-index": i });
+
+			g.appendChild(mkEl("line", {
+				x1: cx0 + r0 * ux,   y1: cy0 + r0 * uy,
+				x2: n.cx - n.r * ux, y2: n.cy - n.r * uy,
+				stroke: "#444", "stroke-width": 2
+			}));
+			g.appendChild(mkEl("circle", {
+				cx: n.cx, cy: n.cy, r: n.r,
+				fill: n.fill, stroke: n.stroke, "stroke-width": 2
+			}));
+			const lineH = 15;
+			const startY = n.cy - (n.label.length * lineH) / 2 + lineH * 0.7;
+			n.label.forEach((line, j) => {
+				g.appendChild(mkText(line, {
+					x: n.cx, y: startY + j * lineH,
+					"text-anchor": "middle", fill: n.textColor, "font-size": 12
+				}));
+			});
+			g.appendChild(mkText(n.sublabel, {
+				x: n.cx, y: n.cy + n.r + 14,
+				"text-anchor": "middle", fill: "#666", "font-size": 11
+			}));
+
+			svg.appendChild(g);
+		});
+
+		// Center circle drawn last (always visible, sits on top of spokes)
+		const centerG = mkEl("g", {});
+		centerG.appendChild(mkEl("circle", {
+			cx: cx0, cy: cy0, r: r0,
+			fill: "rgba(20,184,166,0.15)", stroke: "#14b8a6", "stroke-width": 2
+		}));
+		["Core Logic", "Model"].forEach((label, i) => {
+			centerG.appendChild(mkText(label, {
+				x: cx0, y: cy0 - 7 + i * 17,
+				"text-anchor": "middle", fill: "#14b8a6", "font-weight": "bold", "font-size": 14
+			}));
+		});
+		svg.appendChild(centerG);
+
+		// Re-scan for fragments since they were added after initial Reveal setup
+		Reveal.sync();
+	}
+
+	Reveal.on("ready",  positionFeedbackArrow);
+	Reveal.on("resize", positionFeedbackArrow);
+	// Re-run whenever the agentic loop slide becomes visible
+	Reveal.on("slidechanged", positionFeedbackArrow);
+
+	Reveal.on("ready",  buildToolsDiagram);
+	Reveal.on("resize", buildToolsDiagram);
+</script>
+</body>
+</html>
