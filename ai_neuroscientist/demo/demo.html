@@ -9,7 +9,7 @@
         background-color: #000033;
         color: #ffffff;
         font-family: 'Courier New', Courier, monospace;
-        font-size: 14px; 
+        font-size: 16px; 
         display: flex;
         height: 100vh;
         margin: 0;
@@ -22,6 +22,8 @@
         padding-right: 2rem;
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
+        scroll-behavior: smooth;
     }
     #output {
         margin-bottom: 1rem;
@@ -38,13 +40,15 @@
         margin-bottom: 0.3rem;
         color: #cccccc;
     }
-    #result-image {
-        max-width: 100%;
-        max-height: 500px;
-        object-fit: contain;
-        display: none;
-        margin-top: 1rem;
-        border: 1px solid #555555;
+    .log-line-reasoning {
+        margin-bottom: 0.2rem;
+        color: #999;
+        white-space: pre-wrap;
+    }
+    .log-line-output {
+        margin-bottom: 0.3rem;
+        color: #ffffff;
+        white-space: pre-wrap;
     }
     #ascii-art {
         position: fixed;
@@ -60,7 +64,7 @@
     }
     #input-line {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
     }
     #command-input {
         background: transparent;
@@ -71,6 +75,12 @@
         outline: none;
         flex: 1;
         caret-color: #ffffff;
+        resize: none;
+        overflow: hidden;
+        line-height: inherit;
+        padding: 0;
+        margin: 0;
+        min-height: 1em;
     }
 </style>
 </head>
@@ -80,11 +90,11 @@
     <div id="output"></div>
     
     <div id="input-line" class="prompt-line">
-        <span class="prompt-symbol">user></span>
-        <input type="text" id="command-input" autocomplete="off" autofocus>
+        <span class="prompt-symbol">user> </span>
+        <textarea id="command-input" rows="1" autocomplete="off" autofocus></textarea>
     </div>
 
-    <img id="result-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/FMRI_scan_during_working_memory_tasks.jpg/640px-FMRI_scan_during_working_memory_tasks.jpg" alt="fMRI prep output">
+    <div id="scroll-anchor"></div>
 </div>
 
 <div id="ascii-art">
@@ -118,16 +128,38 @@
 
 <script>
     const agentResponseText = "Running agent...";
-    const processingSteps = [
-        "I will begin by verifying that the data at /path/to/data is formatted according to BIDS standards and checking available system RAM and CPU cores to optimize the run.",
-        "Next, I will launch the fMRIPrep container to perform anatomical normalization to MNI space, surface reconstruction, and functional co-registration while calculating motion and noise regressors.",
-        "Finally, I will review the generated HTML visual reports to ensure the registration and brain masking are accurate before presenting the processed files.",
-        "Done!"
+    const reasoningSteps = [
+        "Operational Checklist\n[ ] Fetch and Validate Dataset\n[ ] Profile NIfTI Metadata\n[ ] Quantify Motion and Variance\n[ ] Generate Diagnostic Visuals\n[ ] Synthesize Quality Metrics and Recommendations",
+        "First, I will retrieve the Haxby 2001 dataset specifically for Subject 1.",
+        "Next I will read the NIfTI header to extract the image dimensions and repetition time (TR).",
+        "I will then calculate the Framewise Displacement (FD) and DVARS to identify physical head motion and intensity spikes.",
+        "Now I will generate a carpet plot to look for global signal artifacts across all voxels, a mean EPI image to check for signal dropout, and a glass brain to visualize the spatial distribution of the temporal mean.",
+        "Finally, I will run the comprehensive QC suite.",
+        "All steps have been completed. I will summarize the findings and save the report to the output directory."
     ];
+    const outputTrace = [
+        "Here is the final analysis of the Haxby dataset for subject 1:\n\n",
+        "1. Dataset Information: The dataset consists of a 4D fMRI scan with 1452 volumes. The voxel size is 3.5 x 3.75 x 3.75 mm, and the repetition time (TR) is 2.5 seconds. The scan duration is approximately 60.5 minutes.\n\n",
+        "2. Motion Artifacts: The mean framewise displacement (FD) is 0.149 mm, with a maximum FD of 1.210 mm. There are 30 volumes (2.1% of the total) where FD exceeds the commonly used threshold of 0.5 mm.\n\n",
+        "3. QC Metrics: The mean tSNR is 13.68, which is considered poor. This could indicate low signal quality or high noise levels.\n\n",
+        "4. Visualizations: I generated a glass brain plot, a carpet plot, and a mean EPI plot to visualize the activation.\n\n",
+        "Based on these findings, I recommend further investigation into the low tSNR and potential outlier volumes. The low tSNR could be due to various factors such as scanner noise, physiological noise, or preprocessing steps.",
+        "All outputs saved to: /Users/aakash/nilearn_data/haxby2001/subj1/qc_output",
+        "    bold_motion.png (276 KB)\n",
+        "    carpet.png (708 KB)\n",
+        "    glass_brain.png (183 KB)\n",
+        "    mean_epi.png (41 KB)\n",
+        "    report_sub-01.html (635 KB)\n"
+    ]
 
     const inputField = document.getElementById('command-input');
     const inputLine = document.getElementById('input-line');
     const outputDiv = document.getElementById('output');
+
+    inputField.addEventListener('input', function() {
+        inputField.style.height = 'auto';
+        inputField.style.height = inputField.scrollHeight + 'px';
+    });
 
     inputField.addEventListener('keydown', async function(event) {
         if (event.key === 'Enter') {
@@ -178,16 +210,25 @@
         }
     }
 
-    async function showProcessingSteps() {
-        for (const step of processingSteps) {
-            const stepLine = document.createElement('div');
-            stepLine.className = 'log-line';
-            outputDiv.appendChild(stepLine);
-            for (let i = 0; i < step.length; i++) {
-                stepLine.textContent += step.charAt(i);
-                await delay(28);
+    const terminalContainer = document.getElementById('terminal-container');
+    function scrollToBottom() {
+        terminalContainer.scrollTop = terminalContainer.scrollHeight;
+    }
+
+    async function typeLines(steps, cssClass, charDelay, pauseAfter) {
+        for (const step of steps) {
+            const sublines = step.split('\n');
+            for (const sub of sublines) {
+                const el = document.createElement('div');
+                el.className = cssClass;
+                outputDiv.appendChild(el);
+                for (let i = 0; i < sub.length; i++) {
+                    el.textContent += sub.charAt(i);
+                    await delay(charDelay);
+                }
+                scrollToBottom();
             }
-            await delay(800);
+            await delay(pauseAfter);
         }
     }
 
@@ -195,8 +236,10 @@
         await delay(500);
         await typeCommand();
         await delay(800);
-        await showProcessingSteps();
-        document.getElementById('result-image').style.display = 'block';
+        await typeLines(reasoningSteps, 'log-line-reasoning', 10, 300);
+        await delay(400);
+        await typeLines(outputTrace, 'log-line-output', 12, 100);
+        scrollToBottom();
     }
 </script>
 </body>
