@@ -6,7 +6,7 @@
 	<title>AI Agents in Neuroscience</title>
 	<link rel="stylesheet" href="../dist/reset.css">
 	<link rel="stylesheet" href="../dist/reveal.css">
-	<link rel="stylesheet" href="../dist/theme/black.css" id="theme">
+	<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
 	<style>
 		/* ── Override reveal default heading sizes / uppercase ── */
 		.reveal h1 {
@@ -47,7 +47,7 @@
 
 		/* ── Shared placeholder box ── */
 		.placeholder {
-			background: #111827;
+			background: #ffffff;
 			border: 2px dashed #14b8a6;
 			border-radius: 8px;
 			display: flex;
@@ -162,11 +162,11 @@
 			font-size: 0.78em;
 			margin-bottom: 6px;
 		}
-		.flow-box .flow-sub { font-size: 0.62em; color: #aaa; }
+		.flow-box .flow-sub { font-size: 0.62em; color: #bdbcbc; }
 		.flow-source {
 			background: rgba(20,184,166,0.12);
 			border: 2px solid #14b8a6;
-			color: #e2e8f0;
+			color: #14b8a6;
 		}
 		.flow-process {
 			background: rgba(70,70,80,0.7);
@@ -176,7 +176,7 @@
 		.flow-output {
 			background: rgba(139,92,246,0.12);
 			border: 2px solid #8b5cf6;
-			color: #e2e8f0;
+			color: #8b5cf6;
 		}
 		.flow-arrow {
 			font-size: 1.6em;
@@ -203,8 +203,8 @@
 		.demo-screen {
 			border: 3px solid rgba(255,255,255,0.7);
 			border-radius: 6px;
-			width: 72%;
-			height: 48vh;
+			width: 90%;
+			height: 62vh;
 			margin: 14px auto 0;
 			display: flex;
 			align-items: center;
@@ -301,7 +301,7 @@
 	<h2>Existing Automated Scientists</h2>
 	<h3>Precedents in chemistry and biology</h3>
 	<p style="font-size: 0.7em; color: #bbb; margin: 6px 0 14px;">
-		AI agents already automate synthesis, sequencing, and imaging across scientific disciplines.
+		AI agents already automate literature review, design and synthesis, and data analysis across scientific disciplines.
 	</p>
 	<div class="panel-grid">
 		<div class="panel-cell fragment fade-in" data-fragment-index="0">
@@ -312,13 +312,13 @@
 		</div>
 		<div class="panel-cell fragment fade-in" data-fragment-index="1">
 			<div class="placeholder" style="height: 190px; width: 100%;">
-				<img src="images/coding-agent.png" alt="Coding Agent" style="width: 100%; height: 100%; object-fit: contain;">
+				<img src="images/claude-life.png" alt="Claude for Life Sciences" style="width: 100%; height: 100%; object-fit: contain;">
 			</div>
-			<div class="panel-caption"><strong style="color:#14b8a6;">Autonomous Coding</strong><br>Data pipelines &amp; analysis</div>
+			<div class="panel-caption"><strong style="color:#14b8a6;">Life Sciences</strong><br>Data pipelines &amp; analysis</div>
 		</div>
 		<div class="panel-cell fragment fade-in" data-fragment-index="2">
 			<div class="placeholder" style="height: 190px; width: 100%;">
-				<img src="images/scrnaseq-umap.png" alt="Single-cell sequencing" style="width: 100%; height: 100%; object-fit: contain;">
+				<img src="images/scrnaseq-agents.png" alt="Single-cell sequencing" style="width: 100%; height: 100%; object-fit: contain;">
 			</div>
 			<div class="panel-caption"><strong style="color:#14b8a6;">scRNA-seq processing</strong><br>Cell biology &amp; pathology</div>
 		</div>
@@ -405,18 +405,18 @@
 		</div>
 		<div class="flow-arrow fragment fade-in" data-fragment-index="2">→</div>
 		<div class="flow-box flow-output fragment fade-in" data-fragment-index="2">
-			<div class="flow-title">Interaction Maps</div>
+			<div class="flow-title">Activation Maps</div>
 			<div class="flow-sub">Analysis-ready outputs</div>
 		</div>
 	</div>
 
 	<div style="display: flex; justify-content: center; gap: 60px; margin-top: 6px;">
 		<div class="fragment fade-in" data-fragment-index="3" style="font-size: 0.62em; color: #aaa; text-align: center;">
-			<span style="color: #14b8a6; font-weight: bold;">fMRI</span><br>
+			<span style="color: #242cbf; font-weight: bold;">fMRI</span><br>
 			Motion correction, denoising,<br>temporal filtering
 		</div>
 		<div class="fragment fade-in" data-fragment-index="4" style="font-size: 0.62em; color: #aaa; text-align: center;">
-			<span style="color: #8b5cf6; font-weight: bold;">EEG / Ephys</span><br>
+			<span style="color: #cb641f; font-weight: bold;">EEG / Ephys</span><br>
 			Spike sorting,<br>artifact removal
 		</div>
 	</div>
@@ -472,42 +472,48 @@
 	<h3>Framing the agent as a collaborator</h3>
 
 
-	<table style="max-width: 800px; margin: 0 auto; font-size: 0.9em; border-spacing: 0 10px; table-layout: fixed; width: 100%;">
-		<thead>
-			<tr>
-				<th style="padding: 16px 36px; width: 50%;">Agent Tasks 🤖</th>
-				<th style="padding: 16px 36px; width: 50%;">Human Tasks 🧑‍🔬</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td style="padding: 16px 32px; width: 50%;">Routine data preparation</td>
-				<td style="padding: 16px 32px; width: 50%;">Experimental design</td>
-			</tr>
-			<tr>
-				<td style="padding: 16px 32px; width: 50%;">Statistical extraction</td>
-				<td style="padding: 16px 32px; width: 50%;">Final validation</td>
-			</tr>
-			<tr>
-				<td style="padding: 16px 32px; width: 50%;">Literature synthesis</td>
-				<td style="padding: 16px 32px; width: 50%;">Hypothesis selection</td>
-			</tr>
-		</tbody>
-	</table>
+	<div style="display: flex; align-items: center; justify-content: center; gap: 24px; width: 100%; margin-top: 24px;">
+
+		<!-- Left: Robot -->
+		<div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; width: 80px;">
+			<div style="font-size: 2.4em; line-height: 1;">🤖</div>
+			<div style="font-size: 0.38em; color: #888; text-transform: uppercase; letter-spacing: 0.06em;">Agent</div>
+		</div>
+
+		<!-- Agent bubbles (flow right toward center) -->
+		<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px; flex: 1; max-width: 280px;">
+			<div class="fragment fade-in-then-semi-out" data-fragment-index="0" style="background: rgba(139,92,246,0.15); border: 1.5px solid #8b5cf6; border-radius: 20px 20px 20px 4px; padding: 8px 18px; font-size: 0.44em; color: #c4b5fd; white-space: nowrap;">Routine data preparation</div>
+			<div class="fragment fade-in-then-semi-out" data-fragment-index="1" style="background: rgba(139,92,246,0.15); border: 1.5px solid #8b5cf6; border-radius: 20px 20px 20px 4px; padding: 8px 18px; font-size: 0.44em; color: #c4b5fd; white-space: nowrap;">Statistical extraction</div>
+			<div class="fragment fade-in-then-semi-out" data-fragment-index="2" style="background: rgba(139,92,246,0.15); border: 1.5px solid #8b5cf6; border-radius: 20px 20px 20px 4px; padding: 8px 18px; font-size: 0.44em; color: #c4b5fd; white-space: nowrap;">Literature synthesis</div>
+		</div>
+
+		<!-- Center divider -->
+		<div style="flex-shrink: 0; width: 1px; height: 120px; background: #333; margin: 0 24px;"></div>
+
+		<!-- Scientist bubbles (flow left toward center) -->
+		<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex: 1; max-width: 280px;">
+			<div class="fragment fade-in-then-semi-out" data-fragment-index="3" style="background: rgba(20,184,166,0.12); border: 1.5px solid #14b8a6; border-radius: 20px 20px 4px 20px; padding: 8px 18px; font-size: 0.44em; color: #5eead4; white-space: nowrap;">Hypothesis selection</div>
+			<div class="fragment fade-in-then-semi-out" data-fragment-index="4" style="background: rgba(20,184,166,0.12); border: 1.5px solid #14b8a6; border-radius: 20px 20px 4px 20px; padding: 8px 18px; font-size: 0.44em; color: #5eead4; white-space: nowrap;">Experimental design</div>
+			<div class="fragment fade-in-then-semi-out" data-fragment-index="5" style="background: rgba(20,184,166,0.12); border: 1.5px solid #14b8a6; border-radius: 20px 20px 4px 20px; padding: 8px 18px; font-size: 0.44em; color: #5eead4; white-space: nowrap;">Final validation</div>
+		</div>
+
+		<!-- Right: Scientist -->
+		<div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; width: 80px;">
+			<div style="font-size: 2.4em; line-height: 1;">🧑‍🔬</div>
+			<div style="font-size: 0.38em; color: #888; text-transform: uppercase; letter-spacing: 0.06em;">Human</div>
+		</div>
+
+	</div>
 </section>
 
 <!-- ─── 9. Transition to live demo ─── -->
 <section>
 	<h2 style="text-align: left; font-size: 1em; margin-bottom: 4px;">
-		Transition to Live Demonstration
+		Agent Demonstration
 	</h2>
-	<h3 style="text-align: left; font-size: 0.72em; margin-bottom: 0;">
-		Anchoring theory to the workshop prototype
-	</h3>
 
-	<div class="demo-screen">
-		<div class="demo-label">BrainLM / Neural Agent prototype</div>
-		<span style="color: #3a3a3a; font-size: 0.85em;">[ Live screen share ]</span>
+	<div class="demo-screen" style="padding: 0; overflow: hidden;">
+		<iframe src="demo.html" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
 	</div>
 </section>
 
@@ -580,21 +586,21 @@
 		const svg = document.getElementById("tools-svg");
 		if (!svg) return;
 
-		const W = 740, H = 420;
+		const W = 740, H = 500;
 		svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 		svg.setAttribute("width", W);
 		svg.setAttribute("height", H);
 
-		const cx0 = 370, cy0 = 220, r0 = 62;
-		const purple = { stroke: "#8b5cf6", fill: "rgba(139,92,246,0.15)", textColor: "#c4b5fd" };
+		const cx0 = 370, cy0 = 220, r0 = 80;
+		const purple = { stroke: "#6d28d9", fill: "rgba(109,40,217,0.18)", textColor: "#a78bfa" };
 		const pink   = { stroke: "#bf00bf", fill: "rgba(191,0,191,0.15)",  textColor: "#e879e8" };
 
 		const nodes = [
-			{ angle: -85, orbit: 150, r: 55, ...purple, label: ["Terminal", "Code Editor"],       sublabel: "Execute scripts" },
-			{ angle:  -10, orbit: 190, r: 70, ...pink,   label: ["Domain-Specific", "Tools"], sublabel: "Specialized analysis" },
-			{ angle:   50, orbit: 160, r: 53, ...purple, label: ["Memory", "Storage"],        sublabel: "Persist context" },
-			{ angle:  140, orbit: 170, r: 65, ...pink,   label: ["Data", "Processing"],       sublabel: "Transform & analyze" },
-			{ angle:  200, orbit: 190, r: 55, ...purple, label: ["Literature", "Database"],   sublabel: "Search & retrieve" },
+			{ angle: -85, orbit: 160, r: 55, ...purple, label: ["Terminal", "Code Editor"],       sublabel: "Execute scripts" },
+			{ angle:  -10, orbit: 220, r: 85, ...pink,   label: ["Domain-Specific", "Tools"], sublabel: "Specialized analysis" },
+			{ angle:   50, orbit: 170, r: 53, ...purple, label: ["Memory", "Storage"],        sublabel: "Persist context" },
+			{ angle:  140, orbit: 200, r: 65, ...pink,   label: ["Data", "Processing"],       sublabel: "Transform & analyze" },
+			{ angle:  195, orbit: 210, r: 55, ...purple, label: ["Literature", "Database"],   sublabel: "Search & retrieve" },
 		];
 
 		nodes.forEach(n => {
@@ -634,17 +640,17 @@
 				cx: n.cx, cy: n.cy, r: n.r,
 				fill: n.fill, stroke: n.stroke, "stroke-width": 2
 			}));
-			const lineH = 15;
-			const startY = n.cy - (n.label.length * lineH) / 2 + lineH * 0.7;
+		const lineH = 22;
+		const startY = n.cy - (n.label.length * lineH) / 2 + lineH * 0.7;
 			n.label.forEach((line, j) => {
 				g.appendChild(mkText(line, {
 					x: n.cx, y: startY + j * lineH,
-					"text-anchor": "middle", fill: n.textColor, "font-size": 12
+					"text-anchor": "middle", fill: n.textColor, "font-size": 20
 				}));
 			});
 			g.appendChild(mkText(n.sublabel, {
 				x: n.cx, y: n.cy + n.r + 14,
-				"text-anchor": "middle", fill: "#666", "font-size": 11
+				"text-anchor": "middle", fill: "#666", "font-size": 18
 			}));
 
 			svg.appendChild(g);
@@ -658,8 +664,8 @@
 		}));
 		["Core Logic", "Model"].forEach((label, i) => {
 			centerG.appendChild(mkText(label, {
-				x: cx0, y: cy0 - 7 + i * 17,
-				"text-anchor": "middle", fill: "#14b8a6", "font-weight": "bold", "font-size": 14
+				x: cx0, y: cy0 - 11 + i * 30,
+				"text-anchor": "middle", fill: "#14b8a6", "font-weight": "bold", "font-size": 24
 			}));
 		});
 		svg.appendChild(centerG);
