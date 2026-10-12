@@ -4,196 +4,555 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aakash Patel — PhD Student, Biomedical AI</title>
-  <meta name="description" content="Personal website for Aakash Patel, PhD student at Yale focusing on biomedical AI, single‑cell genomics, and multimodal learning." />
-  <meta name="theme-color" content="#0a0a0a" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="description" content="Personal website for Aakash Patel, PhD student at Yale focusing on biomedical AI, single-cell genomics, and multimodal learning." />
+  <meta name="theme-color" content="#faf9f7" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #ffffff;
-      --fg: #0a0a0a;
-      --muted: #5d5d5d;
-      --line: #e7e7e7;
-      --link: #1b5cff;
-      --accent: #1b5cff;
-      --card: #f7f7f7;
-      --shadow: 0 1px 1px rgba(0,0,0,.04), 0 8px 20px rgba(0,0,0,.04);
+      --bg: #faf9f7;
+      --fg: #1a1a1a;
+      --muted: #6b6b6b;
+      --line: #e6e3dc;
+      --link: #1a4d8c;
+      --link-hover: #0f2f56;
+      --chip: #f0eee8;
+      --chip-border: #ddd9cf;
+      --venue: #3d3d3d;
+      --max: 42rem;
+      --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     }
     @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0b0c10;
-        --fg: #f3f5f7;
-        --muted: #aab0ba;
-        --line: #1c2026;
-        --link: #94b3ff;
-        --accent: #94b3ff;
-        --card: #11141a;
-        --shadow: none;
+      :root:not([data-theme="light"]) {
+        --bg: #121314;
+        --fg: #eceae6;
+        --muted: #9a9690;
+        --line: #2a2c2e;
+        --link: #8eb4e0;
+        --link-hover: #b8d0ef;
+        --chip: #1c1e20;
+        --chip-border: #323538;
+        --venue: #c8c4bc;
       }
     }
-    html, body { height: 100%; }
+    :root[data-theme="dark"] {
+      --bg: #121314;
+      --fg: #eceae6;
+      --muted: #9a9690;
+      --line: #2a2c2e;
+      --link: #8eb4e0;
+      --link-hover: #b8d0ef;
+      --chip: #1c1e20;
+      --chip-border: #323538;
+      --venue: #c8c4bc;
+    }
+    :root[data-theme="light"] {
+      --bg: #faf9f7;
+      --fg: #1a1a1a;
+      --muted: #6b6b6b;
+      --line: #e6e3dc;
+      --link: #1a4d8c;
+      --link-hover: #0f2f56;
+      --chip: #f0eee8;
+      --chip-border: #ddd9cf;
+      --venue: #3d3d3d;
+    }
+
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       background: var(--bg);
       color: var(--fg);
-      font: 16px/1.6 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      font-optical-sizing: auto;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; text-underline-offset: 2px; }
-
-    /* Layout: compact left column, scrollable right content (al-folio-like) */
-    .page { display: grid; grid-template-columns: 280px 1fr; min-height: 100dvh; }
-    @media (max-width: 900px) { .page { grid-template-columns: 1fr; } }
-
-    aside {
-      border-right: 1px solid var(--line);
-      padding: 28px 22px; position: sticky; top: 0; align-self: start; height: 100dvh; overflow: auto; background: color-mix(in srgb, var(--bg), transparent 10%);
+    a {
+      color: var(--link);
+      text-decoration: none;
+      text-underline-offset: 0.15em;
     }
-    @media (max-width: 900px) { aside { position: static; height: auto; } }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
 
-    main { padding: 36px min(6vw, 48px); }
+    .wrap {
+      width: min(100% - 2.5rem, var(--max));
+      margin: 0 auto;
+      padding: 2.75rem 0 4rem;
+    }
 
-    .name { font-weight: 800; letter-spacing: -0.02em; font-size: clamp(26px, 4.2vw, 34px); line-height: 1.15; }
-    .role { color: var(--muted); margin-top: 6px; }
+    .topnav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.75rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    .topnav nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+    .topnav a { color: var(--muted); }
+    .topnav a:hover { color: var(--fg); text-decoration: none; }
+    .theme-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.55rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .theme-btn:hover { color: var(--fg); border-color: var(--muted); }
 
-    .profile { display: block; width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 20px auto; }
-    .nav { margin: 18px 0 26px; display: grid; gap: 8px; }
-    .nav a { color: var(--muted); }
-    .nav a:hover, .nav a:focus { color: var(--fg); }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.75rem 2rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 560px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero .photo { order: -1; justify-self: start; }
+    }
+    .name {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 2.65rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .tagline {
+      margin: 0.85rem 0 0;
+      color: var(--fg);
+      font-size: 1.05rem;
+      max-width: 34rem;
+    }
+    .affiliation {
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+    .photo {
+      width: 118px;
+      height: 118px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+    }
 
-    .contact { display: grid; gap: 6px; margin-top: 18px; font-size: 14px; }
-    .badge { display: inline-block; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; color: var(--muted); }
-    .badgerow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--chip-border);
+      background: var(--chip);
+      border-radius: 4px;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .links a:hover {
+      border-color: var(--muted);
+      text-decoration: none;
+    }
+    .email {
+      margin-top: 0.9rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .email a { color: var(--muted); }
+    .email a:hover { color: var(--link); }
 
-    section { padding: 22px 0 8px; }
-    .section-title { font-size: 13px; text-transform: lowercase; letter-spacing: 0.14em; color: var(--muted); margin: 0 0 10px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+    section { margin-top: 2.75rem; padding-top: 0.25rem; }
+    .section-title {
+      margin: 0 0 1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .section-note {
+      margin: -0.5rem 0 1rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
 
-    .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-    .item { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-    .item .t { font-weight: 600; }
-    .meta { color: var(--muted); font-size: 14px; }
+    .about p { margin: 0 0 0.9rem; }
+    .about p:last-child { margin-bottom: 0; }
 
-    .news { display: grid; gap: 6px; }
-    .news .entry { display: grid; grid-template-columns: 110px 1fr; gap: 12px; border-bottom: 1px dashed var(--line); padding: 8px 0; }
-    .news .entry:last-child { border-bottom: 0; }
-    .news .date { color: var(--muted); font-size: 14px; }
+    .pub-list, .news-list, .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-    footer { border-top: 1px solid var(--line); padding: 18px min(6vw, 48px) 40px; color: var(--muted); }
+    .pub {
+      padding: 1.15rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .pub:last-child { border-bottom: 1px solid var(--line); }
+    .pub-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 0.75rem;
+      margin-bottom: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+    }
+    .venue {
+      color: var(--venue);
+      font-weight: 500;
+    }
+    .pub-date { color: var(--muted); }
+    .pub-title {
+      margin: 0;
+      font-size: 1.08rem;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+    .pub-title a { color: var(--fg); }
+    .pub-title a:hover { color: var(--link); }
+    .authors {
+      margin: 0.35rem 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .authors strong { color: var(--fg); font-weight: 600; }
+    .pub-note {
+      margin: 0.25rem 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    .pub-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.55rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+    }
+    .pub-actions a {
+      padding: 0.2rem 0.45rem;
+      border: 1px solid var(--chip-border);
+      border-radius: 3px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .pub-actions a:hover {
+      color: var(--fg);
+      border-color: var(--muted);
+      text-decoration: none;
+    }
 
-    .visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; border: 0; padding: 0; }
+    .news-item {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 0.85rem;
+      padding: 0.7rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .news-item:last-child { border-bottom: 1px solid var(--line); }
+    .news-date {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.15rem;
+    }
+    .news-body { font-size: 0.98rem; }
+    .news-body .slides {
+      display: inline-block;
+      margin-left: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .timeline li {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 0.85rem;
+      padding: 0.55rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .timeline li:last-child { border-bottom: 1px solid var(--line); }
+    .timeline .when {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.15rem;
+    }
+    .timeline .what { font-size: 0.98rem; }
+
+    footer {
+      margin-top: 3.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      height: 1px; width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      white-space: nowrap;
+      border: 0; padding: 0;
+    }
   </style>
 </head>
 <body>
   <a class="visually-hidden" href="#content">Skip to content</a>
-  <div class="page">
-    <aside>
-      <div class="name">Aakash Patel</div>
-      <img src="assets/profile-cropped.jpg" alt="Aakash Patel" class="profile">
-      <div class="role">PhD student, Computer Science @ Yale</div>
-      <nav class="nav" aria-label="Section navigation">
+  <div class="wrap" id="content">
+    <div class="topnav">
+      <nav aria-label="Section navigation">
         <a href="#about">about</a>
         <a href="#publications">publications</a>
-        <a href="#talks">talks</a>
-        <a href="#contact">contact</a>
-        <a href="resume.pdf">cv</a>
+        <a href="#news">news</a>
+        <a href="resume.pdf">cv ↗</a>
       </nav>
-      <div class="contact" aria-label="Quick contacts">
-        <div><a href="mailto:aakash.patel.ap2853@yale.edu">aakash.patel.ap2853@yale.edu</a></div>
-        <div><a href="https://github.com/aakashdp6548" target="_blank" rel="noopener">github.com/aakashdp6548</a></div>
-        <div><a href="https://linkedin.com/in/aakashdp6548" target="_blank" rel="noopener">linkedin.com/in/aakashdp6548</a></div>
+      <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle color theme">theme</button>
+    </div>
+
+    <header class="hero">
+      <div>
+        <h1 class="name">Aakash Patel</h1>
+        <p class="tagline">
+          I build machine-learning methods for biological data: cell sentences for single-cell genomics, ligand–receptor priors for spatial transcriptomics, and agentic systems for fMRI analysis.
+        </p>
+        <p class="affiliation">
+          Ph.D. student in Computer Science, Yale University (advised by David van Dijk)
+        </p>
+        <div class="links" aria-label="Profiles">
+          <a href="resume.pdf">CV · pdf</a>
+          <a href="https://github.com/aakashdp6548" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/aakashdp6548" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:aakash.patel.ap2853@yale.edu">Email</a>
+        </div>
+        <p class="email"><a href="mailto:aakash.patel.ap2853@yale.edu">aakash.patel.ap2853 (at) yale.edu</a></p>
       </div>
-    </aside>
+      <img class="photo" src="assets/profile-cropped.jpg" alt="Aakash Patel" width="118" height="118" />
+    </header>
 
-    <main id="content">
-      <section id="about" aria-labelledby="about-h">
-        <h2 class="section-title" id="about-h">about</h2>
-        <div class="card">
-          <p>I am a PhD student in Computer Science at Yale, advised by Dr. David van Dijk. My research develops machine-learning methods for biological data, including representing single-cell gene expression data as natural language (Cell2Sentence), modeling cell-cell interactions in spatial transcriptomics with ligand-receptor priors, and vision-language models and agentic systems for interpreting and analyzing fMRI recordings. I am interested in interpretable and multimodal models, few-shot evaluation, and workflows that integrate prior biological knowledge. Before graduate school I worked as a software engineer and did a dual Masters at the University of Michigan in Computer Science and Mathematics. Outside the lab you can probably find me in a coffee shop or bookstore, hiking a trail, or enjoying a craft project.</p>
-        </div>
-      </section>
+    <section id="about" aria-labelledby="about-h">
+      <h2 class="section-title" id="about-h">About</h2>
+      <div class="about">
+        <p>
+          I am a Ph.D. student in Computer Science at Yale, advised by Dr. David van Dijk.
+          My research develops machine-learning methods for biological data, including representing single-cell gene expression as natural language (Cell2Sentence), modeling cell–cell interactions in spatial transcriptomics with ligand–receptor priors, and vision–language models and agentic systems for interpreting fMRI recordings.
+        </p>
+        <p>
+          I am interested in interpretable and multimodal models, few-shot evaluation, and workflows that integrate prior biological knowledge.
+          Before graduate school I worked as a software engineer and completed a dual Masters at the University of Michigan in Computer Science and Mathematics.
+        </p>
+      </div>
+      <ul class="timeline" style="margin-top: 1.25rem;">
+        <li>
+          <div class="when">present</div>
+          <div class="what">Ph.D. in Computer Science, Yale University</div>
+        </li>
+        <li>
+          <div class="when">prior</div>
+          <div class="what">
+            <div>M.S. Computer Science &amp; M.S. Mathematics, University of Michigan</div>
+            <div>Software engineer at EPIC</div>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-      <section id="publications" aria-labelledby="pubs-h">
-        <h2 class="section-title" id="pubs-h">publications</h2>
-        <div class="news">
-          <div class="entry">
-            <div class="date">Apr 2025</div>
-            <div>
-              <div class="t"><a href="https://www.biorxiv.org/content/10.1101/2025.04.14.648850v4" target="_blank" rel="noopener">Scaling Large Language Models for Next-Generation Single-Cell Analysis</a></div>
-              <div class="meta">Under Review. Rizvi, Levine, <strong>Patel</strong>, Zhang, Wang, …, van Dijk.</div>
-            </div>
+    <section id="publications" aria-labelledby="pubs-h">
+      <h2 class="section-title" id="pubs-h">Publications</h2>
+      <ul class="pub-list">
+        <li class="pub">
+          <div class="pub-meta">
+            <span class="venue">NeurIPS workshop 2026</span>
+            <span class="pub-date">Dec 2026</span>
           </div>
-          <div class="entry">
-            <div class="date">Apr 2025</div>
-            <div>
-              <div class="t"><a href="https://arxiv.org/abs/2410.02536" target="_blank" rel="noopener">Intelligence at the Edge of Chaos</a></div>
-              <div class="meta">ICLR. Zhang, <strong>Patel</strong>, Rizvi, Liu, He, Karbasi, …, van Dijk.</div>
-            </div>
+          <h3 class="pub-title">
+            <a href="https://arxiv.org/pdf/2609.25254" target="_blank" rel="noopener">The AI Neuroscientist: An Interactive Agentic Interface for Neuroimaging Analysis</a>
+          </h3>
+          <p class="authors"><strong>Aakash Patel</strong>, Panos Ketonis, Adam Noah, Shreya Saxena, Smita Krishnaswamy, and David van Dijk.</p>
+          <p class="pub-note">BrainBodyFM and AgenticLS workshop at NeurIPS 2026.</p>
+          <div class="pub-actions">
+            <a href="https://arxiv.org/pdf/2609.25254" target="_blank" rel="noopener">pdf</a>
+            <!-- <a href="ai_neuroscientist/ai_neuroscientist.html">page</a> -->
           </div>
-          <div class="entry">
-            <div class="date">Aug 2025</div>
-            <div>
-              <div class="t"><a href="https://iopscience.iop.org/article/10.3847/1538-3881/adef32" target="_blank" rel="noopener">Neural Posterior Estimation for Cataloging Astronomical Images with Spatially Varying Backgrounds and Point Spread Functions</a></div>
-              <div class="meta">The Astronomical Journal. <strong>Patel</strong>, Zhang, Avestruz, Regier, & LSST DESC.</div>
-            </div>
+        </li>
+        <li class="pub">
+          <div class="pub-meta">
+            <span class="venue">NeurIPS workshop 2026</span>
+            <span class="pub-date">Dec 2026</span>
           </div>
-        </div>
-      </section>
+          <h3 class="pub-title">Induced T1 Degradation Selectively Destabilizes Surface-Mapped fMRI Representations</h3>
+          <p class="authors"><strong>Aakash Patel</strong>, Panos Ketonis, Smita Krishnaswamy, and David van Dijk.</p>
+          <p class="pub-note">BrainBodyFM workshop at NeurIPS 2026.</p>
+        </li>
+        <li class="pub">
+          <div class="pub-meta">
+            <span class="venue">SITC 2026</span>
+            <span class="pub-date">Nov 2026</span>
+          </div>
+          <h3 class="pub-title">Benchmarking foundation models for immunotherapy response prediction in renal cell carcinoma: Data, not architecture, is the current bottleneck.</h3>
+          <p class="authors"><strong>Aakash Patel</strong>, Shawn Wahi, Cerise Tang, David A. Braun, and David van Dijk.</p>
+          <p class="pub-note">Abstract accepted to SITC 2026.</p>
+        </li>
+        <li class="pub">
+          <div class="pub-meta">
+            <span class="venue">Under review</span>
+            <span class="pub-date">Apr 2025</span>
+          </div>
+          <h3 class="pub-title">
+            <a href="https://www.biorxiv.org/content/10.1101/2025.04.14.648850v4" target="_blank" rel="noopener">Scaling Large Language Models for Next-Generation Single-Cell Analysis</a>
+          </h3>
+          <p class="authors">Syed Rizvi, Daniel Levine, <strong>Aakash Patel</strong>, Shiyang Zhang, Eric Wang, …, David van Dijk.</p>
+          <div class="pub-actions">
+            <a href="https://www.biorxiv.org/content/10.1101/2025.04.14.648850v4.full.pdf" target="_blank" rel="noopener">pdf</a>
+            <a href="https://www.biorxiv.org/content/10.1101/2025.04.14.648850v4" target="_blank" rel="noopener">biorxiv</a>
+            <!-- <a href="c2s_talk/c2s_scale_talk.html">talk</a> -->
+          </div>
+        </li>
+        <li class="pub">
+          <div class="pub-meta">
+            <span class="venue">ICLR 2025</span>
+            <span class="pub-date">Apr 2025</span>
+          </div>
+          <h3 class="pub-title">
+            <a href="https://arxiv.org/abs/2410.02536" target="_blank" rel="noopener">Intelligence at the Edge of Chaos</a>
+          </h3>
+          <p class="authors">Shiyang Zhang, <strong>Aakash Patel</strong>, Syed Rizvi, …, David van Dijk.</p>
+          <div class="pub-actions">
+            <a href="https://arxiv.org/pdf/2410.02536" target="_blank" rel="noopener">pdf</a>
+            <a href="https://arxiv.org/abs/2410.02536" target="_blank" rel="noopener">arxiv</a>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="pub-meta">
+            <span class="venue">The Astronomical Journal</span>
+            <span class="pub-date">Aug 2025</span>
+          </div>
+          <h3 class="pub-title">
+            <a href="https://iopscience.iop.org/article/10.3847/1538-3881/adef32" target="_blank" rel="noopener">Neural Posterior Estimation for Cataloging Astronomical Images with Spatially Varying Backgrounds and Point Spread Functions</a>
+          </h3>
+          <p class="authors"><strong>Aakash Patel</strong>, Tianqing Zhang, Camille Avestruz, Jeffrey Regier, &amp; LSST DESC.</p>
+          <div class="pub-actions">
+            <a href="https://iopscience.iop.org/article/10.3847/1538-3881/adef32" target="_blank" rel="noopener">journal</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-      <section id="talks" aria-labelledby="talks-h">
-        <h2 class="section-title" id="talks-h">talks</h2>
-        <div class="news">
-          <div class="entry">
-            <div class="date">Jan 2026</div>
-            <div>
-              Invited talk on <em>BrainLM</em> at the Columbia Eating Disorders Research Seminar.
-              <div><a href="brainlm/brainlm.html" target="_blank" rel="noopener">Slides</a>
-              </div>
-            </div>
+    <section id="news" aria-labelledby="news-h">
+      <h2 class="section-title" id="news-h">News</h2>
+      <ul class="news-list">
+        <li class="news-item">
+          <div class="news-date">Aug 2026</div>
+          <div class="news-body">
+            Accepted to the inaugural cohort of Yale's
+            <a href="https://fds.yale.edu/fellows/" target="_blank" rel="noopener">Peter Salovey and Marta Moret Data Science Fellows Program</a>.
           </div>
-          <div class="entry">
-            <div class="date">Sep 2025</div>
-            <div>
-              Invited talk on <em>NPE for Cataloging Astronomical Images</em> at the Yale Data Science × Astrophysics Seminar.
-              <div><a href="https://docs.google.com/presentation/d/e/2PACX-1vTulzIKvlqIcgQD0C2EvawX0_OfbGvc6PR3suusQjJw8jCQfgtewKk9gXrNi8QXuWnRpWoZeUZSwiFx/pub?start=false&loop=false&delayms=3000" target="_blank" rel="noopener">Slides</a>
-              </div>
-            </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">Apr 2026</div>
+          <div class="news-body">
+            Presented <em>Knowledge-Grounded Reinforcement Learning for High-Fidelity Single-Cell Cluster Captioning</em>
+            at the AI at Yale Symposium.
           </div>
-        </div>
-      </section>
+        </li>
+        <li class="news-item">
+          <div class="news-date">Mar 2026</div>
+          <div class="news-body">
+            Presented <em>Predicting renal cell carcinoma outcomes from clinical trial data using multimodal genomic foundation models</em>
+            at the Yale AI in Cancer Workshop and the Yale Medical AI Symposium.
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">Feb 2026</div>
+          <div class="news-body">
+            Organized the <em>Toward an AI Neuroscientist</em> workshop at the Wu Tsai Institute.
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">Jan 2026</div>
+          <div class="news-body">
+            Invited talk on <em>BrainLM</em> at the Columbia Eating Disorders Research Seminar.
+            <a class="slides" href="brainlm/brainlm.html" target="_blank" rel="noopener">slides</a>
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">Sep 2025</div>
+          <div class="news-body">
+            Invited talk on <em>NPE for Cataloging Astronomical Images</em> at the Yale Data Science × Astrophysics Seminar.
+            <a class="slides" href="https://docs.google.com/presentation/d/e/2PACX-1vTulzIKvlqIcgQD0C2EvawX0_OfbGvc6PR3suusQjJw8jCQfgtewKk9gXrNi8QXuWnRpWoZeUZSwiFx/pub?start=false&amp;loop=false&amp;delayms=3000" target="_blank" rel="noopener">slides</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-      <section id="contact" aria-labelledby="contact-h">
-        <h2 class="section-title" id="contact-h">contact</h2>
-        <div class="card">
-          <p>Email: <a href="mailto:aakash.patel.ap2853@yale.edu">aakash.patel.ap2853@yale.edu</a><br>
-          GitHub: <a href="https://github.com/aakashdp6548" target="_blank" rel="noopener">github.com/aakashdp6548</a><br>
-          LinkedIn: <a href="https://linkedin.com/in/aakashdp6548" target="_blank" rel="noopener">linkedin.com/in/aakashdp6548</a><br>
-          CV: <a href="resume.pdf">resume.pdf</a></p>
-        </div>
-      </section>
-    </main>
+    <footer>
+      <div>© <span id="y"></span> Aakash Patel</div>
+      <div>Set in Newsreader &amp; IBM Plex Mono</div>
+    </footer>
   </div>
 
-  <footer>
-    <div>© <span id="y"></span> Aakash Patel · GitHub Pages ready</div>
-  </footer>
-
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if (el) {
-          e.preventDefault();
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          history.pushState(null, '', '#' + id);
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById("theme-toggle");
+      var stored = localStorage.getItem("theme");
+      if (stored === "light" || stored === "dark") {
+        root.setAttribute("data-theme", stored);
+      }
+      function label() {
+        var t = root.getAttribute("data-theme");
+        if (t === "dark") return "theme · dark";
+        if (t === "light") return "theme · light";
+        return "theme · auto";
+      }
+      btn.textContent = label();
+      btn.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        var next = cur === "light" ? "dark" : cur === "dark" ? null : "light";
+        if (next) {
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+        } else {
+          root.removeAttribute("data-theme");
+          localStorage.removeItem("theme");
         }
+        btn.textContent = label();
       });
-    });
+    })();
   </script>
 
   <script type="application/ld+json">
